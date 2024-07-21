@@ -13,15 +13,25 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      userID: {
+      userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
       status: {
         type: Sequelize.ENUM,
         allowNull: false,
-        values: ["InProgress", "Booked", "Cancelled"],
-        defaultValue: "INProgress",
+        values: ["InProcess", "Booked", "Cancelled"],
+        defaultValue: "InProcess",
+      },
+      noOfSeats: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 1,
+      },
+      totalCost: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,

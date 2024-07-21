@@ -1,12 +1,12 @@
 const { StatusCodes } = require("http-status-codes");
 const { ValidationError, AppError } = require("../utils/index");
-const Booking = require("../models/index");
+// const Booking = require("../models/index");
 
 class BookingRepository extends Booking {
   async create(data) {
     try {
-      const booking = await Booking.create(data);
-      return booking;
+      // const booking = await Booking.create(data);
+      // return booking;
     } catch (error) {
       if (error.name == "SequelizeValidationError") {
         throw new ValidationError(error);
@@ -22,4 +22,4 @@ class BookingRepository extends Booking {
   }
 }
 
-module.exports = BookingRepository;
+// module.exports = BookingRepository;
