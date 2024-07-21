@@ -1,8 +1,9 @@
 const bodyParser = require("body-parser");
 const express = require("express");
+const { PORT } = require("./config/serverConfig");
+const apiRoutes = require("./routers/index");
 
 const app = express();
-const PORT = 3001;
 
 const setupAndStartServer = () => {
   app.use(bodyParser.json());
@@ -11,6 +12,9 @@ const setupAndStartServer = () => {
       extended: true,
     })
   );
+
+  app.use("/api ", apiRoutes);
+
   app.listen(
     (PORT,
     async () => {
