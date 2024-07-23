@@ -1,11 +1,11 @@
-const bodyParser = require("body-parser");
 const express = require("express");
+const bodyParser = require("body-parser");
 const { PORT } = require("./config/serverConfig");
-const apiRoutes = require("./routers/index");
-const db = require("./models/index");
-const app = express();
+const ApiRoutes = require("./routes/index");
 
-const setupAndStartServer = () => {
+const setupAndStartService = async () => {
+  const app = express();
+
   app.use(bodyParser.json());
   app.use(
     bodyParser.urlencoded({
@@ -13,17 +13,11 @@ const setupAndStartServer = () => {
     })
   );
 
-  app.use("/api ", apiRoutes);
+  app.use("/api", ApiRoutes);
 
-  app.listen(
-    (PORT,
-    async () => {
-      console.log(`Server is running on port ${PORT}`);
-      if (process.env.DB_SYNC) {
-        db.sequelize.sync({ alter: true });
-      }
-    })
-  );
+  app.listen(PORT, async () => {
+    console.log(`Server Started at ${PORT}`);
+  });
 };
 
-setupAndStartServer();
+setupAndStartService();
