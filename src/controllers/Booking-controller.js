@@ -10,11 +10,16 @@ class BookingController {
 
   async sendMessageToQueue(req, res) {
     const channel = await createChannel();
-    const data = {
-      message: "Success",
-      service: "DEMO_SERVICE",
+    const payload = {
+      data: {
+        subject: "This is the notification from queue ",
+        content: "This is the some Content from queue",
+        recipientEmail: "devanandrana168@gmail.com",
+        notificationTime: "2024-07-26T19:58:32.202Z",
+      },
+      service: "CREATE_TICKET",
     };
-    publishMessage(channel, REMINDER_BINDING_KEY, JSON.stringify(data));
+    publishMessage(channel, REMINDER_BINDING_KEY, JSON.stringify(payload));
     return res.status(StatusCodes.OK).json({
       message: "Message sent to queue",
     });
@@ -22,7 +27,6 @@ class BookingController {
   async create(req, res) {
     try {
       const response = await bookingService.createBooking(req.body);
-      console.log("from controller ", response);
       return res.status(StatusCodes.OK).json({
         data: response,
         message: "Booking created successfully",
